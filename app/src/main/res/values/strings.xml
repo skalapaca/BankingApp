@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">RHProject</string>
+    <string name="app_name">RHProject </string>
+    <string name="help_button">help</string>
+    <string name="elderly_switch">Elderly</string>
+    <string name="name">Hello, %s</string>
+    <string name="balanceName">Available Balance</string>
+    <string name="balance">Total: $%s</string>
+    <string name="checking">Checking:</string>
+    <string name="item">Item#:</string>
+    <string name="nameItem">Name:</string>
+    <string name="cost">Price:</string>
+    <string name="expenseChart">Expenses:</string>
+    <string name="visit">Visit Us At:</string>
+    <string name="meeting">Schedule A Meeting</string>
+    <string name="email">Email us At</string>
+    <string name="Deposit">Deposit Money</string>
+    <string name="Spend">Spend Money</string>
+    <string name="depositMoney">Deposit Money</string>
+    <string name="type">type</string>
+    <string name="yourbalance">$%s</string>
 </resources>

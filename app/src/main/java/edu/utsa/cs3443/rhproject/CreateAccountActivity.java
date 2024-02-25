@@ -3,6 +3,7 @@ package edu.utsa.cs3443.rhproject;
 import edu.utsa.cs3443.rhproject.account.*;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.accounts.AccountAuthenticatorActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CreateAccountActivity extends AppCompatActivity {
+    public final ArrayList<Account> accounts = new ArrayList<Account>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -28,6 +37,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         Button resetButton = findViewById(R.id.reset_button);
         Button backButton = findViewById(R.id.back_button);
 
+//        Account accountRey = new Account("ReyGuerra", "Pass123" , "Rey");
+//        Account accountJoe = new Account("JoeMama", "Mother87", "Joe");
+//        Account accountJames = new Account("JamesLebron", "Baller23" , "James");
+//        Account accountMaria = new Account("DearMaria", "AllTimeLow1" , "Maria");
+//        accounts.add(accountRey);
+//        accounts.add(accountJoe);
+//        accounts.add(accountJames);
+//        accounts.add(accountMaria);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,8 +55,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String cnpass = confirmNewPassword.getText().toString();
                 if ( isValidPass(npass, cnpass) ) {
                     Account account = new Account(user, npass, name);
-                    outputToTextFile(account);
-                    //launchActivity();
+                    accounts.add(account);
+                    launchActivity();
                 }
                 else {
                     Toast toast = Toast.makeText(view.getContext(), "Invalid user data!", Toast.LENGTH_LONG);
@@ -95,13 +113,22 @@ public class CreateAccountActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void outputToTextFile(Account account) {
-        try {
-            FileWriter output = new FileWriter("C:/Users/bossh/AccountsInfo.txt", true);
+    public void outputToTextFile(Account account) throws IOException {
+        File internalStorageDir = getFilesDir();
+        File outputFile = new File(internalStorageDir, "AccountInfo");
+        FileOutputStream outputStream = new FileOutputStream(outputFile);
+        PrintStream printStream = new PrintStream(outputStream);
+        printStream.println(account.getUsername() + "," + account.getPassword() + "," + account.getName() + "\n");
+        printStream.close();
+        outputStream.close();
+            FileWriter output = new FileWriter("\\AccountsInfo.txt", true);
             output.write(account.getUsername() + "," + account.getPassword() + "," + account.getName() + "\n");
             output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
+
+    public ArrayList<Account> getAccounts(){
+        return this.accounts;
+    }
+
+
 }

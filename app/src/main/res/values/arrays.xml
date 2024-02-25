@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="expense_category">
+        <item>Expenses</item>
+        <item>food</item>
+        <item>entertainment</item>
+        <item>utilities</item>
+        <item>misc</item>
+    </string-array>
+
 </resources>
