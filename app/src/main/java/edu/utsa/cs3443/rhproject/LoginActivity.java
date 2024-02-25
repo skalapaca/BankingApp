@@ -20,17 +20,29 @@ import java.util.Scanner;
 public class LoginActivity extends AppCompatActivity {
 //    CreateAccountActivity account = new CreateAccountActivity();
 //    public ArrayList<Account> accounts = account.getAccounts();
-    public ArrayList<Account> accounts = new ArrayList<Account>();
-    Account accountRey = new Account("ReyGuerra","Pass1234", "Rey");
-    Account accountJoe = new Account("JoeMama", "Mother87", "Joe");
-    Account accountJames = new Account("JamesLebron", "Baller23" , "James");
-    Account accountMaria = new Account("DearMaria", "AllTimeLow1" , "Maria");
-    accounts.add(accountRey);
-    accounts.add(accountJoe);
-    accounts.add(accountJames);
-    accounts.add(accountMaria);
+    ArrayList<Account> accounts = new ArrayList<Account>();
+
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.view);
+//
+//        Intent intent = getIntent();
+//
+//        String userName = intent.getStringExtra("firstName");
+//        String  = intent.getStringExtra("lastName");
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Account accountRey = new Account("ReyGuerra","Pass1234", "Rey");
+        Account accountJoe = new Account("JoeMama", "Mother87", "Joe");
+        Account accountJames = new Account("JamesLebron", "Baller23" , "James");
+        Account accountMaria = new Account("DearMaria", "AllTimeLow1" , "Maria");
+
+        accounts.add(accountRey);
+        accounts.add(accountJoe);
+        accounts.add(accountJames);
+        accounts.add(accountMaria);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -39,27 +51,32 @@ public class LoginActivity extends AppCompatActivity {
         TextView username = (EditText)findViewById(R.id.editTextTextUsername);
         TextView password = (EditText)findViewById(R.id.editTextTextPassword);
 
-        String user = username.getText().toString();
-        String pass = password.getText().toString();
+//        String user = username.getText().toString().trim();
+//        String pass = password.getText().toString().trim();
 
-        boolean accountFound = false;
-        boolean passCorrect = false;
-        for(Account account: accounts){
-            if (account.getUsername().equals(user)){
-                accountFound = true;
-                Toast toast = Toast.makeText(this, "Username Found", Toast.LENGTH_LONG);
-                toast.show();
-                if (account.getPassword() == pass.hashCode()){
-                    passCorrect = true;
-                }
-            }
-        }
 
-        boolean finalPassCorrect = passCorrect;
-        boolean finalAccountFound = accountFound;
+//        Toast toast = Toast.makeText(this, account.getUsername(), Toast.LENGTH_LONG);
+//        toast.show();
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String user = username.getText().toString().trim();
+                String pass = password.getText().toString().trim();
+
+                boolean accountFound = false;
+                boolean passCorrect = false;
+
+                for(Account account: accounts){
+                    if (account.getUsername().equals(user)){
+                        accountFound = true;
+                        if (account.getPassword() == pass.hashCode()){
+                            passCorrect = true;
+                        }
+                    }
+                }
+
+                boolean finalPassCorrect = passCorrect;
+                boolean finalAccountFound = accountFound;
                 if (finalAccountFound && finalPassCorrect) {
                     launchMainActivity();
                 }

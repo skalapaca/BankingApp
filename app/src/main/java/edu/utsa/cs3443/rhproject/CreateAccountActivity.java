@@ -37,14 +37,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         Button resetButton = findViewById(R.id.reset_button);
         Button backButton = findViewById(R.id.back_button);
 
-//        Account accountRey = new Account("ReyGuerra", "Pass123" , "Rey");
-//        Account accountJoe = new Account("JoeMama", "Mother87", "Joe");
-//        Account accountJames = new Account("JamesLebron", "Baller23" , "James");
-//        Account accountMaria = new Account("DearMaria", "AllTimeLow1" , "Maria");
-//        accounts.add(accountRey);
-//        accounts.add(accountJoe);
-//        accounts.add(accountJames);
-//        accounts.add(accountMaria);
+        Account accountRey = new Account("ReyGuerra", "Pass123" , "Rey");
+        Account accountJoe = new Account("JoeMama", "Mother87", "Joe");
+        Account accountJames = new Account("JamesLebron", "Baller23" , "James");
+        Account accountMaria = new Account("DearMaria", "AllTimeLow1" , "Maria");
+        accounts.add(accountRey);
+        accounts.add(accountJoe);
+        accounts.add(accountJames);
+        accounts.add(accountMaria);
+        accounts.get(0).
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +85,9 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
     private void launchActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("username", accounts.get(accounts.size()-1).getUsername());
+        intent.putExtra("password", accounts.get(accounts.size()-1).getPassword());
+        intent.putExtra("name", accounts.get(accounts.size()-1).getName());
         startActivity(intent);
     }
 
@@ -92,7 +96,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         valid = !pass.equals(""); //Check that pass is not blank
         valid = (pass.equals(cpass));
-        valid = (pass.length() < 8) ? false : true; //Check that pass is not less than 8 chars
+        valid = pass.length() >= 8; //Check that pass is not less than 8 chars
 
         for(char c : pass.toCharArray()) {
             if (Character.isDigit(c))

@@ -1,10 +1,13 @@
 package edu.utsa.cs3443.rhproject.account;
+import android.view.View;
+
 import edu.utsa.cs3443.rhproject.currency.*;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class Account {
+    public View submitButton;
     int pass;
     String username, name;
     DinoMoney money;
@@ -19,7 +22,7 @@ public class Account {
 
         valid = !pass.equals(""); //Check that pass is not blank
         valid = (pass.equals(cpass));
-        valid = (pass.length() < 8) ? false : true; //Check that pass is not less than 8 chars
+        valid = pass.length() >= 8; //Check that pass is not less than 8 chars
 
         for(char c : pass.toCharArray()) {
             if (Character.isDigit(c))
